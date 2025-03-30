@@ -76,10 +76,8 @@ function renderBooks() {
     })
 }
 
-for(i=0;i<10;i++) {
-    const theHobbit = new Book("The Hobbit", "J. R. R. Tolkien", 295, false);
-    myLibrary.push(theHobbit);
-}
+const theHobbit = new Book("The Hobbit", "J. R. R. Tolkien", 295, false);
+myLibrary.push(theHobbit);
 
 renderBooks();
 
@@ -95,6 +93,12 @@ const inputElements = document.querySelectorAll("#title, #author, #pages");
 closeButtons.forEach(button => {
     button.addEventListener("click", () => {
         const inputsNotEmpty = [...inputElements].every(input => input.value !== "");
-        inputsNotEmpty && modal.close();
+        if(button.textContent == "Close") {
+            modal.close();
+        }
+
+        if(inputsNotEmpty) {
+            modal.close();
+        }
     })
 })
