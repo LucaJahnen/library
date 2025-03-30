@@ -41,17 +41,38 @@ const root = document.querySelector("#root");
 function renderBooks() {
     root.innerHTML = "";
     myLibrary.map(({title, author, pages, read, id}) => {
-        root.innerHTML += `
-            <section class="card">
-                <h2>${title}</h2>
-                <p>${author}</p>
-                <p>${pages} pages</p>
-                <div>
-                    <button class="change" onclick='changeStatus("${id}")'>${read ? "read" : "not read yet"}</button>
-                    <button class="remove" onclick='removeBook("${id}")'>Remove</button>
-                </div>
-            </section>
-        `;
+        const card = document.createElement("section");
+        card.classList.add("card");
+
+        const titleElem = document.createElement("h2");
+        titleElem.textContent = title;
+
+        const authorElem = document.createElement("p");
+        authorElem.textContent = author;
+
+        const pagesElem = document.createElement("p");
+        pagesElem.textContent = `${pages} pages`;
+
+        const buttonContainer = document.createElement("div");
+
+        const changeButton = document.createElement("button");
+        changeButton.classList.add("change");
+        changeButton.textContent = read ? "read" : "not read yet";
+        changeButton.onclick = () => changeStatus(id);
+
+        const removeButton = document.createElement("button");
+        removeButton.classList.add("remove");
+        removeButton.textContent = "Remove";
+        removeButton.onclick = () => removeBook(id);
+
+        buttonContainer.appendChild(changeButton);
+        buttonContainer.appendChild(removeButton);
+        card.appendChild(titleElem);
+        card.appendChild(authorElem);
+        card.appendChild(pagesElem);
+        card.appendChild(buttonContainer);
+
+        root.appendChild(card);
     })
 }
 
