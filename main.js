@@ -13,7 +13,6 @@ function Book(title, author, pages, read) {
 
 Book.prototype.changeStatus = function() {
     this.read = !this.read;
-    renderBooks();
 }
 
 const form = document.querySelector("form");
@@ -30,6 +29,7 @@ function addBookToLibrary(e) {
 function changeStatus(id) {
     const currentBook = myLibrary.find(book => book.id === id);
     currentBook.changeStatus();
+    renderBooks();
 }
 
 function removeBook(id) {
